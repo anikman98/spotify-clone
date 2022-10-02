@@ -52,7 +52,7 @@ const Container = styled.div`
         color: black;
         background-color: #1ED760;
         letter-spacing: 1.5px;
-        transition: background-color 0.2s ease;
+        transition: background-color 0.3s ease;
 
         &:hover{
             background-color: black;
