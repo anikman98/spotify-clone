@@ -27,19 +27,26 @@ const Playlist = () => {
   return (
     <Container>
         <ul>
-            {
-                playlists.map(({name, id})=> {
-                    return (
-                        <li key={id}>{name}</li>
-                    );
-                })
-            }
+        {
+            playlists.map(({name, id})=> {
+                return (
+                    <li key={id}>{
+                        name.length > 25
+                        ? name.slice(0,26)+'...'
+                        : name
+                    }
+                    </li>
+                );
+            })
+        }
         </ul>
     </Container>
   )
 }
 
 const Container = styled.div`
+    height: 100%;
+    overflow: hidden;
     ul{
         list-style-type: none;
         padding: 0;
@@ -51,6 +58,16 @@ const Container = styled.div`
         font-weight: 400;
         font-size: 0.9rem;
         color: #C0C0C0;
+        height: 62vh;
+        min-height: 100%;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 0.6rem;
+            &-thumb{
+                background-color: rgba(255, 255, 255, 0.5);
+            }
+        }
 
         li{
             &:hover{
