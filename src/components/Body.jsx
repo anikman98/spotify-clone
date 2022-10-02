@@ -1,9 +1,14 @@
 import React from 'react'
+import styled from 'styled-components'
 
 const Body = () => {
   return (
-    <div>Body</div>
+    <Container>Body</Container>
   )
 }
+
+const Container = styled.div`
+    overflow: auto;
+`;
 
 export default Body

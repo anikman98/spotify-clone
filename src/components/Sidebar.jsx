@@ -8,7 +8,6 @@ const Sidebar = () => {
 }
 
 const Container = styled.div`
-    // background: black;
     height: 100%;
 `;
 

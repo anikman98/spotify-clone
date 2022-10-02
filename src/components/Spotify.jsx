@@ -31,7 +31,7 @@ const Container = styled.div`
   height: 100vh;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 7vh 83vh 10vh;
+  grid-template-rows: 6.5vh 83vh 10vh;
   background: black;
   color: white;
 
@@ -58,7 +58,7 @@ const Container = styled.div`
       margin: 0 0.5rem;
       margin-left: 0.2rem !important;
       padding: 1rem;
-      background: linear-gradient( to bottom, #2A1916 , #121212, #121212, #121212);
+      background: linear-gradient( to bottom, #2A1916 , #121212,  #121212);
       background-color:;
       border-radius: 0.5rem;
     }
