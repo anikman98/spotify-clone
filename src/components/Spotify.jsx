@@ -1,11 +1,39 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Sidebar from './Sidebar';
 import Body from './Body';
 import Navbar from './Navbar';
 import Footer from './Footer';
+import { useStateProvider } from '../utils/StateProvider';
+import axios from 'axios';
+import { reducerCases } from '../utils/Constants';
+
 
 const Spotify = () => {
+
+  const [{token, playlists}, dispatch] = useStateProvider();
+
+  useEffect(()=>{
+    const getUserInfo = async () => {
+      const {data} = await axios.get("https://api.spotify.com/v1/me",{
+        headers: {
+          Authorization: 'Bearer '+token,
+          "Content-Type": "application/json",
+        }
+      });
+      const userInfo = {
+        userId: data.id,
+        userName: data.display_name,
+        userImage: data.images[0].url,
+      };
+      dispatch({type: reducerCases.SET_USER, userInfo});
+    };
+    getUserInfo();
+  },[token, dispatch]);
+
+  let d = new Date();
+  let hrs = d.getHours();
+
   return (
     <Container>
       <div className="spotify_navbar">
@@ -15,7 +43,7 @@ const Spotify = () => {
         <div className="sidebar">
           <Sidebar/>
         </div>
-        <div className="body">
+        <div className={(hrs >= 4 && hrs < 12) ? "body morning" : ((hrs >= 12 && hrs < 17) ? "body afternoon" : "body evening") }>
             <Body/>
         </div>
       </div>
@@ -58,9 +86,18 @@ const Container = styled.div`
       margin: 0 0.5rem;
       margin-left: 0.2rem !important;
       padding: 1rem;
-      background: linear-gradient( to bottom, #2A1916 , #121212,  #121212);
       background-color:;
       border-radius: 0.5rem;
+    }
+    .morning{
+      background: linear-gradient( to bottom , rgba(163, 110, 5, 0.75),  #121212 25%);
+    }
+    .afternoon{
+      background: linear-gradient( to bottom, #2A1916 ,  #121212 25%);
+    }
+    .evening{
+      background: linear-gradient( to bottom, rgba(5, 95, 163, 0.7),  #121212 30%);
+
     }
   }
 

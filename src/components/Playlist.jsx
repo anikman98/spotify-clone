@@ -19,7 +19,6 @@ const Playlist = () => {
             const {items} = response.data;
             const playlists = items.map(({name, id}) => {return {name, id}});
             dispatch({type: reducerCases.SET_PLAYLISTS, playlists});
-            console.log(playlists);
         }
         getPlaylistData();
     },[token, dispatch]);
@@ -31,8 +30,8 @@ const Playlist = () => {
             playlists.map(({name, id})=> {
                 return (
                     <li key={id}>{
-                        name.length > 25
-                        ? name.slice(0,26)+'...'
+                        name.length > 27
+                        ? name.slice(0,25)+'...'
                         : name
                     }
                     </li>
