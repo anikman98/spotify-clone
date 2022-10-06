@@ -82,10 +82,9 @@ const Container = styled.div`
 
     .body{
       width: 100%;
-      height: 95%;
+      height: 99%;
       margin: 0 0.5rem;
       margin-left: 0.2rem !important;
-      padding: 1rem;
       background-color:;
       border-radius: 0.5rem;
     }
