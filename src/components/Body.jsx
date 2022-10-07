@@ -62,26 +62,26 @@ const Body = () => {
     <Container>
         {
             selectedPlaylist ?
-                <SelectedPlaylist className="playlist">
+                <SelectedPlaylist>
                     <div className="playlist_top">
                         <div className="playlist_image">
                             <img src={selectedPlaylist.image} alt={selectedPlaylist.name} />
                         </div>
                         <div className="playlist_details">
-                            <span>PLAYLIST</span>
+                            <span className='playlist_text'>PLAYLIST</span>
                             <h1>{selectedPlaylist.name}</h1>
                             <div className="artists">
-                                {selectedPlaylist.tracks[0].artists}, {selectedPlaylist.tracks[1].artists} <span>and more</span>
+                                {selectedPlaylist.tracks[0].artists[0]}<span>,</span> {selectedPlaylist.tracks[1].artists[0]}<span>,</span> {selectedPlaylist.tracks[2].artists[0]} <span>and more</span>
                             </div>
                             <div className="detail">
-                                <h3 className='owner'>{selectedPlaylist.owner}</h3>, 
-                                <h3 className='tracks_count'>&nbsp;{selectedPlaylist.tracks.length} songs</h3>, 
-                                <h3 className='duration'>&nbsp;{selectedPlaylist.duration}</h3>
+                                <h3 className='owner'>{selectedPlaylist.owner}</h3>&nbsp;&nbsp;<p>•</p>&nbsp; 
+                                <h3 className='tracks_count'>&nbsp;{selectedPlaylist.tracks.length} songs</h3><span>,</span> 
+                                <h3 className='duration'>&nbsp;{parseInt(selectedPlaylist.duration/(1000*60*60))} hr</h3>
                             </div>
                         </div>    
                     </div>
                     <div className="playlist_bottom">
-                    
+                        
                     </div>
                     
                 </SelectedPlaylist>
@@ -102,57 +102,99 @@ const Body = () => {
 
 const Container = styled.div`
     overflow: auto;
-    // padding-top: 0.2rem;
-    // padding-left: 0.7rem;
-    // padding-right: 0.7rem;
     font-weight: 600;
-    margin: 1rem;
-
+    // margin: 1rem;
+    overflow: hidden;
+    
     // border: 2px solid red;
-
+    
     .greetings{
         font-size: 2rem;
     }
-`;
-
+    `;
+    
 const SelectedPlaylist = styled.div`
     height: 100%;
     width: 100%;
-
+    overflow-x: hidden !important;
+    border-radius: 10px 10px 0px 0px;
+    display:flex;
+    
+    // border: 1px solid red;
+    
     .playlist_top{
+        background-color: rgb(160, 224, 216);
+        background: linear-gradient(to bottom, rgba(160, 224, 216,1), rgba(160, 224, 216,0.5));
+        width:100%;
+        padding: 1rem;
         display: flex;
         flex-direction: row;
         align-items: flex-end;
         gap: 1rem;
         
         .playlist_details{
-            
 
             span{
-                font-size:0.7rem;
+                font-size:0.9rem;
                 font-weight: 100;
                 padding-left: 2px;
             }
-
+            
             h1{
+                display: block;
                 font-size: 7rem;
                 padding:0;
+                padding-bottom: 20px;
                 margin:0;
-                border: 1px solid red;
+                line-height: 120px;
+                font-weight: bold;
+            }
+
+            .artists{
+                font-weight: 400 !important;
+                font-size: 0.9rem;
+                span{
+                    color: #e6e6e6;
+                }
+            }
+            
+            .detail{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding-bottom: 10px;
+                margin: 0;
+                
+                h3{
+                    line-height: 0.5rem;
+                    font-size: 1rem;
+                }
+                
+                p{
+                    font-size: 0.6rem;
+                }
+                
+                span{
+                    color: #e6e6e6;
+                }
+
+                .tracks_count{
+                    font-weight: lighter;
+                }
+                
+                .duration{
+                    color: #e6e6e6;
+                    font-size: 0.99rem;
+                    font-weight: 400;
+                }
+                
             }
         }
-
         img{
             padding: 1rem;
-            height: 200px;
+            height: 232px;
         }
-        
-        .detail{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            
-        }
+
     }
 `;
 
