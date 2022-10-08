@@ -90,15 +90,17 @@ const Container = styled.div`
       overflow-x: hidden;
       z-index: 0;
 
-      &::-webkit-scrollbar-track {
-          background: transparent;
-      }
 
       &::-webkit-scrollbar {
           width: 0.5rem;
-          &-thumb{
-              background-color: rgba(255, 255, 255, 0.5);
-              border-radius: 5px;
+          &-track{
+              background-color: rgba(255, 255, 255, 0.3);
+              border-radius: 0 10px 10px 0 ;
+            }
+            &-thumb{
+              margin-top: 0.5rem;
+              background-color: rgba(255, 255, 255, 0.4);
+              border-radius: 10px;
           }
       }
     }
