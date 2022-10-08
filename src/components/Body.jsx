@@ -198,9 +198,9 @@ const SelectedPlaylist = styled.div`
 
     .false{
         /* fill: #c7c7c7;  */
+        fill: #1ed760;
     }
     .true{
-        fill: #1ed760;
     }
     
     .playlist_top{
@@ -322,7 +322,8 @@ const SelectedPlaylist = styled.div`
             }
             
             .favourite{
-                fill: #c7c7c7;
+                fill: #1ed760;
+
             }
             
             .menu{
