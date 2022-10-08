@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { reducerCases } from '../utils/Constants';
 import { useStateProvider } from '../utils/StateProvider';
+import '../index.css';
 
 const Body = () => {
 
@@ -80,7 +81,7 @@ const Body = () => {
                             </div>
                         </div>    
                     </div>
-                    <div className="playlist_bottom">
+                    <div className="playlist_bottom gradient">
                         <div className="playlist_play">
                             <button type="button" className="play_button" aria-aria-label='Play/Pause'>
                                 <svg role="img" height="28" width="28" viewBox="0 0 24 24" class="Svg-ytk21e-0 jAKAlG"><path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z"></path></svg>
@@ -92,40 +93,45 @@ const Body = () => {
                             </button>
                         </div>
                         <div className="tracks">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <td>#</td>
-                                        <td>TITLE</td>
-                                        <td>ALBUM</td>
-                                        <td>
-                                            <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="Svg-ytk21e-0 jAKAlG"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path><path d="M8 3.25a.75.75 0 01.75.75v3.25H11a.75.75 0 010 1.5H7.25V4A.75.75 0 018 3.25z"></path></svg>
-                                        </td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <hr className='dash'/>
-                                        </td>
-                                    </tr>
-                                    {
-                                        selectedPlaylist.tracks.map((track, index)=>{
-                                            return(
-                                                <tr key={index}>
-                                                    <td>{index+1}</td>
-                                                    <td>{track.name}</td>
-                                                    <td>{track.album}</td>
-                                                    <td>{track.duration}</td>
-                                                </tr>
-                                                )
-                                            })
-                                    }
-                                </tbody>
-                            </table>
+                            <div className="track_header">
+                                <div className="header_items sl_no">
+                                    <span>
+                                        #
+                                    </span>
+                                </div>
+                                <div className="header_items title">
+                                    <span>
+                                        TITLE
+                                    </span>
+                                </div>
+                                <div className="header_items album">
+                                    <span>
+                                        ALBUM
+                                    </span>
+                                </div>
+                                <div className="header_items time">
+                                    <span>
+                                        <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="Svg-ytk21e-0 jAKAlG"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path><path d="M8 3.25a.75.75 0 01.75.75v3.25H11a.75.75 0 010 1.5H7.25V4A.75.75 0 018 3.25z"></path></svg>    
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="dash"></div>
+                            <div className="track_list">
+                                {
+                                    selectedPlaylist.tracks.map((track, index)=>{
+                                        return(
+                                            <div className='track' key={index}>
+                                                <div className='track_item sl_no'>{index+1}</div>
+                                                <div className='track_item title'>{track.name}</div>
+                                                <div className='track_item album'>{track.album}</div>
+                                                <div className='track_item time'>{track.duration}</div>
+                                            </div>
+                                            )
+                                        })
+                                }                            
+                            </div>
                         </div>
                     </div>
-                    
                 </SelectedPlaylist>
             : <div className="greetings">
             {
@@ -143,21 +149,37 @@ const Body = () => {
 }
 
 const Container = styled.div`
-    overflow: hidden;
-    font-weight: 600;
+    overflow: auto;
+    font-weight: 400;
     
+    &::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0.5);
+      }
+
+      &::-webkit-scrollbar {
+        width: 0.5rem;
+        &-thumb{
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 5px;
+        }
+    }
+
     .greetings{
         font-size: 2rem;
     }
-    `;
+`;
     
 const SelectedPlaylist = styled.div`
     width: 100%;
-    overflow: hidden;
-    border-radius: 10px 10px 0px 0px;
+    overflow: auto;
+    border-radius: 10px 0px 0px 0px;
     display:flex;
     flex-direction: column;
     justify-content: start;
+
+    overflow-x: hidden;
+
+    
     
     .playlist_top{
         background-color: rgb(160, 224, 216);
@@ -171,7 +193,7 @@ const SelectedPlaylist = styled.div`
         
         .playlist_details{
 
-            margin -left: -0.5rem;
+            margin-left: -0.5rem;
 
             span{
                 font-size:0.9rem;
@@ -235,108 +257,100 @@ const SelectedPlaylist = styled.div`
         }
 
     }
+    
     .playlist_bottom{
-
-        background: linear-gradient(to bottom, rgba(160, 224, 216,0.35), transparent);
+        
+        background: linear-gradient(to bottom, rgba(160, 224, 216,0.4), transparent 90%) no-repeat;
+        background-size: 100% 250px;
         width:100%;
         height: 100%;
 
         .tracks{
+            display:flex;
+            flex-direction: column;
+            justify-content: start;
+            /* gap: 1rem; */
+
             padding: 2rem;
-            table{
-                width:100%;
-                border: 2px solid blue;
-                
-                thead{
 
-                    tr{
-                        
-                        border: 2px solid red;
-                        border-bottom: 10px solid #a6a6a6;
-                    
-                    
-                        td{
-                            font-size: 0.8rem;
-                            color: #a6a6a6;
-                            font-weight: lighten;
-                            letter-spacing: 3px;
-                        }
-                        
-                    
-                        td:nth-child(1){
-                            width: 5%;
-                            padding-left: 20px;
-                            
-                        }
-                        td:nth-child(2){
-                            width: 40%;
-                            padding-left: 20px;
-                            
-                        }
-                        td:nth-child(3){
-                            width: 40%;
-                            padding-left: 20px;
-                            
-                        }
-                        td:nth-child(4){
-                            width: 10%;
-                            padding-right: 30px;
-                            text-align: end;
+            .track_header{
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-content: center;
+                gap: 1rem;
 
-                        }
+                .header_items{
+                }
+
+                .sl_no{
+                    width: 5%;
+                    text-align: center;
+                }
+
+                .title{
+                    width: 40%;
+                    padding-left: 1rem;
+                }
+
+                .album{
+                    width: 40%;
+                    padding-left: 1rem;
+                }
+
+                .time{
+                    width: 9%;
+                    text-align: end;
+                    padding-right: 1rem;
+                }
+
+            }
+
+            .track_list{
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                width: 100%;
+                .track{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 1rem;
+                    padding: 0.5rem;
+
+                    .sl_no{
+                        width: 5%;
+                        text-align: center;
+                    }
+
+                    .title{
+                        width: 40%;
+                        padding-left: 1rem;
+                    }
+
+                    .album{
+                        width: 40%;
+                        padding-left: 1rem;
+                    }
+
+                    .time{
+                        width: 9%;
+                        text-align: end;
+                        padding-right: 1rem;
                     }
                 }
-                tbody{
-
-                    tr{
-                        
-                        border: 2px solid red;
-                        border-bottom: 10px solid #a6a6a6;
-                    
-                    
-                        td{
-                            font-size: 0.8rem;
-                            color: #a6a6a6;
-                            font-weight: lighten;
-                            letter-spacing: 3px;
-                        }
-                        
-                    
-                        td:nth-child(1){
-                            width: 5%;
-                            padding-left: 20px;
-                            
-                        }
-                        td:nth-child(2){
-                            width: 40%;
-                            padding-left: 20px;
-                            
-                        }
-                        td:nth-child(3){
-                            width: 40%;
-                            padding-left: 20px;
-                            
-                        }
-                        td:nth-child(4){
-                            width: 10%;
-                            padding-right: 30px;
-                            text-align: end;
-
-                        }
-                    }
-                }
-
+            }
                 
-                .dash{
-                    background-color: #a6a6a6;
-                    height: 1px;
-                    border: none;
-                    margin-top: 1rem;
-                    margin-bottom: 1rem;
-                }
-                svg{
-                    fill:#a6a6a6;
-                }
+            .dash{
+                background-color: #a6a6a6;
+                height: 1px;
+                border: none;
+                margin-top: 0.3rem;
+                margin-bottom: 0.7rem;
+            }
+            svg{
+                fill:#a6a6a6;
             }
         }
     }

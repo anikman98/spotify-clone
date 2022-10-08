@@ -85,8 +85,22 @@ const Container = styled.div`
       height: 99%;
       margin: 0 0.5rem;
       margin-left: 0.2rem !important;
-      background-color:;
       border-radius: 0.5rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 0;
+
+      &::-webkit-scrollbar-track {
+          background: transparent;
+      }
+
+      &::-webkit-scrollbar {
+          width: 0.5rem;
+          &-thumb{
+              background-color: rgba(255, 255, 255, 0.5);
+              border-radius: 5px;
+          }
+      }
     }
     .morning{
       background: linear-gradient( to bottom , rgba(163, 110, 5, 0.75),  #121212 25%);
