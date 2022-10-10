@@ -11,7 +11,7 @@ import { reducerCases } from '../utils/Constants';
 
 const Spotify = () => {
 
-  const [{token, playlists}, dispatch] = useStateProvider();
+  const [{token, selectedPlaylistId}, dispatch] = useStateProvider();
 
   useEffect(()=>{
     const getUserInfo = async () => {
@@ -43,7 +43,7 @@ const Spotify = () => {
         <div className="sidebar">
           <Sidebar/>
         </div>
-        <div className={(hrs >= 4 && hrs < 12) ? "body morning" : ((hrs >= 12 && hrs < 17) ? "body afternoon" : "body evening") }>
+        <div className={selectedPlaylistId ? "body" : ((hrs >= 4 && hrs < 12) ? "body morning" : ((hrs >= 12 && hrs < 17) ? "body afternoon" : "body evening")) }>
             <Body/>
         </div>
       </div>
@@ -88,6 +88,7 @@ const Container = styled.div`
       border-radius: 0.5rem;
       overflow-y: auto;
       overflow-x: hidden;
+      background-color: #121212;
       z-index: 0;
 
 

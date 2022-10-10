@@ -13,6 +13,18 @@ const Body = () => {
 
     const [{token, selectedPlaylistId, selectedPlaylist}, dispatch] = useStateProvider();
 
+    const getTimeFormattedForPlaylistDetails = (duration) => {
+        const hours = Math.floor(duration / (1000 *60 *60));
+        const minutes = Math.floor((duration % (1000*60*60)) / 60000);
+        return hours + ' hr ' + minutes + ' min';
+    }
+
+    const getTimeFormattedForTrackList = (duration) => {
+        const minutes = Math.floor(duration / 60000)
+        const seconds = ((duration % 60000)/1000).toFixed(0);
+        return minutes + ':' + (seconds<10 ? '0'+seconds : seconds);
+    }
+
     useEffect(()=>{
 
         const getInitialPlaylist = async () => {
@@ -79,7 +91,7 @@ const Body = () => {
                             <div className="detail">
                                 <h3 className='owner'>{selectedPlaylist.owner}</h3>&nbsp;&nbsp;<p>•</p>&nbsp; 
                                 <h3 className='tracks_count'>&nbsp;{selectedPlaylist.tracks.length} songs</h3><span>,</span> 
-                                <h3 className='duration'>&nbsp;{parseInt(selectedPlaylist.duration/(1000*60*60))} hr</h3>
+                                <h3 className='duration'>&nbsp;{getTimeFormattedForPlaylistDetails(selectedPlaylist.duration)}</h3>
                             </div>
                         </div>    
                     </div>
@@ -142,7 +154,7 @@ const Body = () => {
                                                         </div>
                                                     </div>
                                                     <div className='track_item album'>{track.album}</div>
-                                                    <div className='track_item time'>{track.duration}</div>
+                                                    <div className='track_item time'>{getTimeFormattedForTrackList(track.duration)}</div>
                                                 </div>
                                             )
                                         })
@@ -339,7 +351,7 @@ const SelectedPlaylist = styled.div`
             display:flex;
             flex-direction: column;
             justify-content: start;
-            padding: 0 2rem;
+            padding: 0 2rem 1.5rem 2rem;
             
             .track_header{
                 display: flex;
@@ -415,12 +427,17 @@ const SelectedPlaylist = styled.div`
                             text-align: center;
                             font-size: 1rem;
                             display: block;
-                            fill: white;
+                            
+                            svg{
+                                fill: white;
+                                width: 18px;
+                                padding-left: 5px;
+                            }
+                            /* border: 1px solid red;                         */
                         }
                     }
                     
                     .track_item{
-                        /* border: 1px solid red;*/                        
                     }
                     
                     .sl_no{
