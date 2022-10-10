@@ -38,7 +38,7 @@ const Body = () => {
             for(let i=0;i<response.data.tracks.items.length; i++){
                 duration= duration+response.data.tracks.items[i].track.duration_ms;
             }
-            console.log(response);
+            // console.log(response);
             const selectedPlaylist = {
                 id: response.data.id,
                 name: response.data.name,
@@ -57,8 +57,8 @@ const Body = () => {
                     track_number: track.track_number,
                 }))
             };
+            // console.log(selectedPlaylist);
             dispatch({type: reducerCases.SET_PLAYLIST, selectedPlaylist});
-            console.log(selectedPlaylist.duration);
         };  
         getInitialPlaylist();
         {/*const getUserTopItems = async () => {
@@ -76,7 +76,7 @@ const Body = () => {
   return (
     <Container>
         {
-            selectedPlaylist ?
+            selectedPlaylist !== null ?
                 <SelectedPlaylist>
                     <div className="playlist_top">
                         <div className="playlist_image">
@@ -97,18 +97,18 @@ const Body = () => {
                     </div>
                     <div className="playlist_bottom">
                         <div className="playlist_buttons">
-                            <button type="button" className="play_button" aria-aria-label='Play/Pause'>
-                                <svg role="img" height="28" width="28" viewBox="0 0 24 24" class="Svg-ytk21e-0 jAKAlG"><path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z"></path></svg>
+                            <button type="button" className="play_button" aria-label='Play/Pause'>
+                                <svg role="img" height="28" width="28" viewBox="0 0 24 24" className="Svg-ytk21e-0 jAKAlG"><path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z"></path></svg>
                             </button>
-                            <button type="button" className="favourite" aria-aria-label='Favourite'>
+                            <button type="button" className="favourite" aria-label='Favourite'>
                                 {
                                     fav 
-                                    ? <svg className='false' role="img" height="32" width="32" viewBox="0 0 24 24" class="Svg-ytk21e-0 jAKAlG"><path d="M5.21 1.57a6.757 6.757 0 016.708 1.545.124.124 0 00.165 0 6.741 6.741 0 015.715-1.78l.004.001a6.802 6.802 0 015.571 5.376v.003a6.689 6.689 0 01-1.49 5.655l-7.954 9.48a2.518 2.518 0 01-3.857 0L2.12 12.37A6.683 6.683 0 01.627 6.714 6.757 6.757 0 015.21 1.57zm3.12 1.803a4.757 4.757 0 00-5.74 3.725l-.001.002a4.684 4.684 0 001.049 3.969l.009.01 7.958 9.485a.518.518 0 00.79 0l7.968-9.495a4.688 4.688 0 001.049-3.965 4.803 4.803 0 00-3.931-3.794 4.74 4.74 0 00-4.023 1.256l-.008.008a2.123 2.123 0 01-2.9 0l-.007-.007a4.757 4.757 0 00-2.214-1.194z"></path></svg>
-                                    : <svg className='true' role="img" height="32" width="32" viewBox="0 0 24 24" class="Svg-ytk21e-0 jAKAlG"><path d="M8.667 1.912a6.257 6.257 0 00-7.462 7.677c.24.906.683 1.747 1.295 2.457l7.955 9.482a2.015 2.015 0 003.09 0l7.956-9.482a6.188 6.188 0 001.382-5.234l-.49.097.49-.099a6.303 6.303 0 00-5.162-4.98h-.002a6.24 6.24 0 00-5.295 1.65.623.623 0 01-.848 0 6.257 6.257 0 00-2.91-1.568z"></path></svg>
+                                    ? <svg role="img" height="32" width="32" viewBox="0 0 24 24" className="Svg-ytk21e-0 jAKAlG false"><path d="M5.21 1.57a6.757 6.757 0 016.708 1.545.124.124 0 00.165 0 6.741 6.741 0 015.715-1.78l.004.001a6.802 6.802 0 015.571 5.376v.003a6.689 6.689 0 01-1.49 5.655l-7.954 9.48a2.518 2.518 0 01-3.857 0L2.12 12.37A6.683 6.683 0 01.627 6.714 6.757 6.757 0 015.21 1.57zm3.12 1.803a4.757 4.757 0 00-5.74 3.725l-.001.002a4.684 4.684 0 001.049 3.969l.009.01 7.958 9.485a.518.518 0 00.79 0l7.968-9.495a4.688 4.688 0 001.049-3.965 4.803 4.803 0 00-3.931-3.794 4.74 4.74 0 00-4.023 1.256l-.008.008a2.123 2.123 0 01-2.9 0l-.007-.007a4.757 4.757 0 00-2.214-1.194z"></path></svg>
+                                    : <svg role="img" height="32" width="32" viewBox="0 0 24 24" className="Svg-ytk21e-0 jAKAlG true"><path d="M8.667 1.912a6.257 6.257 0 00-7.462 7.677c.24.906.683 1.747 1.295 2.457l7.955 9.482a2.015 2.015 0 003.09 0l7.956-9.482a6.188 6.188 0 001.382-5.234l-.49.097.49-.099a6.303 6.303 0 00-5.162-4.98h-.002a6.24 6.24 0 00-5.295 1.65.623.623 0 01-.848 0 6.257 6.257 0 00-2.91-1.568z"></path></svg>
                                 }
                             </button>
-                            <button type="button" className="menu" aria-aria-label='Menu'>
-                                <svg role="img" height="32" width="32" viewBox="0 0 24 24" class="Svg-ytk21e-0 jAKAlG"><path d="M4.5 13.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm15 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-7.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>                            
+                            <button type="button" className="menu" aria-label='Menu'>
+                                <svg role="img" height="32" width="32" viewBox="0 0 24 24" className="Svg-ytk21e-0 jAKAlG"><path d="M4.5 13.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm15 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3zm-7.5 0a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path></svg>                            
                             </button>
                             </div>
                             <div className="tracks">
@@ -124,7 +124,7 @@ const Body = () => {
                                     </div>
                                     <div className="header_items time">
                                         <span>
-                                            <svg role="img" height="16" width="16" viewBox="0 0 16 16" class="Svg-ytk21e-0 jAKAlG"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path><path d="M8 3.25a.75.75 0 01.75.75v3.25H11a.75.75 0 010 1.5H7.25V4A.75.75 0 018 3.25z"></path></svg>    
+                                            <svg role="img" height="16" width="16" viewBox="0 0 16 16" className="Svg-ytk21e-0 jAKAlG"><path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z"></path><path d="M8 3.25a.75.75 0 01.75.75v3.25H11a.75.75 0 010 1.5H7.25V4A.75.75 0 018 3.25z"></path></svg>    
                                         </span>
                                     </div>
                                 </div>
@@ -138,7 +138,7 @@ const Body = () => {
                                                         {index+1}
                                                     </div>
                                                     <div className="track_item play">
-                                                        <svg role="img" height="28" width="28" viewBox="0 0 24 24" class="Svg-ytk21e-0 jAKAlG"><path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z"></path></svg>
+                                                        <svg role="img" height="28" width="28" viewBox="0 0 24 24" className="Svg-ytk21e-0 jAKAlG"><path d="M7.05 3.606l13.49 7.788a.7.7 0 010 1.212L7.05 20.394A.7.7 0 016 19.788V4.212a.7.7 0 011.05-.606z"></path></svg>
                                                     </div>
                                                     <div className='track_item title'>
                                                         <div className="image">
@@ -219,7 +219,7 @@ const SelectedPlaylist = styled.div`
         background-color: rgb(160, 224, 216);
         background: linear-gradient(to bottom, rgba(160, 224, 216,1), rgba(160, 224, 216,0.5));
         width:100%;
-        padding: 1rem;
+        padding: 1.05rem;
         display: flex;
         flex-direction: row;
         align-items: flex-end;

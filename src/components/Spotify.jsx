@@ -59,7 +59,7 @@ const Container = styled.div`
   height: 100vh;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 6.5vh 83vh 10vh;
+  grid-template-rows: 6.5vh 85vh 7.5vh;
   background: black;
   color: white;
 
