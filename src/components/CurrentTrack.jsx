@@ -18,18 +18,22 @@ const CurrentTrack = () => {
                     "Content-Type": "application/json",
                 }
             });
-            // console.log(response);
-            if(response.data.currently_playing_type !== "ad"){
-                const {item} = response.data;
-                const currentlyPlaying = {
-                    id: item.id,
-                    name: item.name,
-                    artists: item.artists.map((artist) => artist.name),
-                    image: item.album.images[2].url
-                };
-                dispatch({type: reducerCases.SET_PLAYING, currentlyPlaying});
+            console.log(response);
+            if(response.data !== ""){
+                if(response.data.currently_playing_type !== "ad" ){
+                    const {item} = response.data;
+                    const currentlyPlaying = {
+                        id: item.id,
+                        name: item.name,
+                        artists: item.artists.map((artist) => artist.name),
+                        image: item.album.images[2].url
+                    };
+                    dispatch({type: reducerCases.SET_PLAYING, currentlyPlaying});
+                }else{
+                    console.log("currently ad is running!");
+                }
             }else{
-                console.log("currently ad is running!")
+                console.log("currently not track playing!");
             }
         };  
         getCurrentTrack();

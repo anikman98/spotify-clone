@@ -18,7 +18,7 @@ const Login = () => {
             "user-read-recently-played"
         ];
 
-        window.location.href = `${apiURL}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scope.join(" ")}&response_type=token&show_dialogue=true`;
+        window.location.href = `${apiURL}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scope.join("%20")}&response_type=token&show_dialogue=true`;
     }
 
   return (
